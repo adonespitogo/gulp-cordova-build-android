@@ -117,6 +117,12 @@ Type: `string`
 
 The format of the key file. The default is to auto-detect based on the file extension.
 
+##### releaseApk
+
+Type: `string`
+
+Sometimes, the `cordova build --release android` produces diferrent apk file/s instead of `android-release.apk`. Specify the apk file to be copied to the `gulp.dest()` folder by passing the release apk filename to this option.
+
 ## Related
 
 See [`gulp-cordova`](https://github.com/SamVerschueren/gulp-cordova) for the full list of available packages.
