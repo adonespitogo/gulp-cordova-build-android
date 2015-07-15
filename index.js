@@ -21,6 +21,7 @@ var path = require('path'),
 module.exports = function(options) {
 
     options = options || {};
+    var releaseApk = options.releaseApk || 'android-release.apk';
 
     return through.obj(function(file, enc, cb) {
         // Change the working directory
@@ -56,7 +57,7 @@ module.exports = function(options) {
                 if(options.storeType) {
                     data.push('storeType=' + options.storeType);
                 }
-                
+
                 // Write the release-signing.properties file
                 fs.writeFileSync(path.join(androidPath, 'release-signing.properties'), data.join(os.EOL));
             }
@@ -77,7 +78,7 @@ module.exports = function(options) {
 
             if(sign) {
                 // Define the release variables
-                path = path.join(base, 'android-release.apk');
+                path = path.join(base, releaseApk);
             } else if (release) {
                 // Define the unsigned release variables
                 path = path.join(base, 'android-release-unsigned.apk');
@@ -86,7 +87,7 @@ module.exports = function(options) {
                 // Define the debug variables
                 path = path.join(base, 'android-debug.apk');
             }
-            
+
             contents = fs.readFileSync(path);
 
             // Make sure the apk is passed to the next step
